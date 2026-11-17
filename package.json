@@ -1,0 +1,28 @@
+{
+  "name": "automata-studio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/inline.mjs",
+    "preview": "vite preview",
+    "test": "node --test",
+    "test:quiet": "node --test --test-reporter=dot",
+    "verify": "node --test --test-reporter=dot && npm run build && npm run smoke",
+    "cli": "node bin/automata.js",
+    "smoke": "node scripts/smoke.mjs",
+    "start": "vite",
+    "demo": "vite preview --outDir website --open"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1",
+    "vite": "^8.3.8"
+  },
+  "bin": {
+    "automata": "bin/automata.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

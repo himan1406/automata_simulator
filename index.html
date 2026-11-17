@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Automata Project – DFA, NFA, Moore and Mealy machines</title>
+  <meta name="description" content="Describe a language in English or as a regex and get the state diagram, transition table and grammar. Runs entirely in your browser.">
+  <meta name="theme-color" content="#b9c6d5">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23c9f75a' stroke='%230b0b0b' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='6' fill='none' stroke='%230b0b0b' stroke-width='3'/%3E%3C/svg%3E">
+</head>
+<body>
+  <noscript><p style="padding:16px;font-family:system-ui">Automata Project needs JavaScript. Everything runs locally in your browser; nothing is sent anywhere.</p></noscript>
+  <header class="topbar"><h1>Automata Project</h1></header>
+  <main class="stage">
+    <section class="panel diagram-panel" aria-label="State diagram">
+      <div class="panel-head">
+        <h2>State diagram</h2>
+        <span class="badge" id="badge">DFA</span>
+      </div>
+      <div id="warn"></div>
+      <div id="dia" class="canvas"></div>
+      <section class="tester">
+        <h3>Test a string</h3>
+        <div class="row">
+          <input id="probe" value="aab" placeholder="type a string (empty = ε)" aria-label="String to test" autocomplete="off" spellcheck="false">
+          <button id="pprev" aria-label="Previous step">◀ Back</button>
+          <button id="pnext" aria-label="Next step">Step ▶</button>
+          <button id="pplay">Play</button>
+          <button id="preset">Reset</button>
+        </div>
+        <div id="tape" class="tape" aria-hidden="true"></div>
+        <p id="pverdict" class="verdict" role="status"></p>
+        <p id="pstat" class="hint" aria-live="polite"></p>
+        <p class="hint">Highlighted states show where the machine is after the characters read so far; Enter jumps to the end.</p>
+      </section>
+    </section>
+
+    <aside class="panel side-panel" aria-label="Machine inputs">
+      <div id="prompt-fields">
+        <label class="lbl" for="desc">Prompt</label>
+        <div class="prompt-row">
+          <input id="desc" value="strings ending with ab" aria-label="Language description">
+          <button id="go" class="primary">Build</button>
+        </div>
+      </div>
+      <div class="row">
+        <select id="mode" aria-label="Input kind">
+          <option value="english">Plain English</option>
+          <option value="regex">Regular expression</option>
+          <option value="table">Transition table</option>
+          <option value="text">Machine text</option>
+        </select>
+        <select id="mt" aria-label="Machine type">
+          <option value="dfa">DFA</option>
+          <option value="nfa">NFA</option>
+          <option value="moore">Moore</option>
+          <option value="mealy">Mealy</option>
+        </select>
+        <label class="alpha">α <input id="alpha" value="a, b" size="5" aria-label="Alphabet"></label>
+      </div>
+      <p class="hint" id="dhint"></p>
+      <div class="ex-row"><span class="lbl">Examples</span><div class="btns" id="ex"></div></div>
+      <label class="lbl" for="src">Machine</label>
+      <textarea id="src" spellcheck="false" aria-label="Machine description"></textarea>
+      <p class="hint">Transitions: <code>q0, a -&gt; q1</code> · Mealy <code>q0, a -&gt; q1 / 1</code> · Moore <code>out q1 = 1</code> · <code>eps</code> for ε.</p>
+      <button id="conv" class="pill">Convert to minimal DFA</button>
+    </aside>
+  </main>
+
+  <section class="lower">
+    <section class="panel"><h2>Transition table</h2><div class="scroll" id="tab"></div><p class="hint">→ start state, * accepting state</p></section>
+    <section class="panel"><h2>Grammar</h2><pre id="gra"></pre></section>
+  </section>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
