@@ -78,12 +78,27 @@ q2, eps -> q0        # eps (or ε / λ / epsilon) = empty move; a bare "e" is a 
 Mealy: `q0, 1 -> q1 / 0` (output after the slash). Moore: `out q1 = 1`.
 "Convert to minimal DFA" turns any DFA/NFA in the text box into its minimal DFA.
 
+**Transition table** — choose *Transition table* as the input kind and type or paste a table (tabs, `|` or spaces all work):
+
+```
+State    a    b
+->  q0   q1   q0
+    q1   q1   q2
+*   q2   q1   q0
+```
+
+`->` marks the start state and `*` the accepting states. A cell holds one target, several (`q1,q2`, which makes it an
+NFA), `eps`, or `q1/1` for a Mealy output. A column headed `Output`/`Out` makes a Moore machine. Missing cells mean
+no transition. The diagram, table and grammar update as you edit, and "Convert to minimal DFA" works on the table too.
+
 ## Layout
 
 ```
 src/core/parse.js      text format -> machine object, edge merging, warnings
 src/core/generate.js   plain English -> machine text (clauses, and/or, negation, parity)
 src/core/regex.js      regex parser, Thompson construction, regex -> NFA / minimal DFA
+src/core/table.js      transition table -> machine text (markers, NFA sets, ε, Moore/Mealy outputs)
+src/core/output.js     complete DFA -> Moore/Mealy machine text
 src/core/dfa.js        product, complement, subset construction, minimisation
 src/core/grammar.js    machine -> right-linear / translation grammar
 src/core/simulate.js   accepts() and trace() (step-by-step run behind the "Test a string" panel)
